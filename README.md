@@ -78,7 +78,11 @@ http://ec2-3-84-133-29.compute-1.amazonaws.com:38000/index.html
 ## Ejemplo de desarrollo
 
 ### Pruebas
-* 
+
+* Video
+  [![Video](https://img.youtube.com/vi/BXyCjFyGHB0/sddefault.jpg)](https://www.youtube.com/watch?v=BXyCjFyGHB0)
+
+* Imagen
 
 ![prueba1.png](src/main/resources/public/img/prueba1.png)
 
