@@ -1,17 +1,33 @@
 package com.example.awslogservice;
 
-import static spark.Spark.staticFiles;
-import static spark.Spark.get;
+import static spark.Spark.*;
+
+
 public class LogServiceFacade {
 
-    private static final String LOG_SERVICE_URL = "http://localhost:5000/logservice";
 
     public static void main(String[] args) {
-        ServiceInvoker invoker = new ServiceInvoker(LOG_SERVICE_URL);
+        String[] logServices = getLogServicesURLS(System.getenv("LOG_SERVICES").split(";"));
+        ServiceInvoker invoker = new ServiceInvoker(logServices);
         staticFiles.location("/public");
-        get("/logservicefacade", (req, res) -> {
+        port(getPort());
+        get("/logs", (req, res) -> {
             res.type("application/json");
-            return invoker.invoke(args);
+            System.out.println(req.queryParams("msg"));
+            return invoker.invoke(req.queryParams("msg").replace(" ", "%20"));
         });
+    }
+
+    private static int getPort() {
+        if (System.getenv("PORT") != null) return Integer.parseInt(System.getenv("PORT"));
+        return 4567;
+    }
+
+    public static String[] getLogServicesURLS(String[] logServices) {
+        String[] logServicesURLS = new String[logServices.length];
+        for (int i = 0; i < logServicesURLS.length; i++) {
+            logServicesURLS[i] = "http://" + logServices[i] + ":35000/service?msg=";
+        }
+        return logServicesURLS;
     }
 }

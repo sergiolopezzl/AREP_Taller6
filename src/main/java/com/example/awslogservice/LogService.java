@@ -1,25 +1,22 @@
 package com.example.awslogservice;
 
-import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import org.bson.Document;
-
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.Date;
 import static spark.Spark.*;
 
 public class LogService {
 
     public static void main(String... args) {
-        MongoDatabase database = ConexionMongoDB.conectar();
-        MongoCollection<Document> collection = database.getCollection("registro");
-
-        port(35000);
-        // get("/guardar", (req,res) -> webClient());
-        get("/logservice", (req, res) -> {
+        MongoDatabase database = MongoDBconnection.getDatabase();
+        LogList logList = new LogList(database);
+        port(getPort());
+        get("/service", (req, res) -> {
+            Date currentDate = new Date();
+            String dateString = currentDate.toString();
+            logList.addLog(dateString, req.queryParams("msg"));
+            System.out.println(req.queryParams("msg"));
             res.type("application/json");
-            return "{\"logid1\":\"20-2-2024-Log Inicial\"}";
+            return logList.listLogs();
         });
     }
 
@@ -29,10 +26,4 @@ public class LogService {
         }
         return 4567;
     }
-
-    public static String getLogs() {
-
-        return null;
-    }
-
 }

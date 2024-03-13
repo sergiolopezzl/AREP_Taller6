@@ -9,39 +9,39 @@ import java.net.URL;
 public class ServiceInvoker {
 
     private static final String USER_AGENT = "Mozilla/5.0";
-    private static String get_URL = "";
+    private static String[] serviceURLs = null;
+    private static int instance = 0;
 
-    public ServiceInvoker(String invokerUrl) {
-        get_URL = invokerUrl;
+    public ServiceInvoker(String[] urls) {
+        serviceURLs = urls;
     }
 
-    public static String invoke(String[] args) throws IOException {
-
-        URL obj = new URL(get_URL);
-        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-        con.setRequestMethod("GET");
-        con.setRequestProperty("User-Agent", USER_AGENT);
-
-        //The following invocation perform the connection implicitly before getting the code
-        int responseCode = con.getResponseCode();
+    public static String invoke(String msg) throws IOException {
+        URL url = new URL(serviceURLs[instance] + msg);
+        if (instance == serviceURLs.length - 1) {
+            instance = 0;
+        } else {
+            instance++;
+        }
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestMethod("GET");
+        int responseCode = 0;
         System.out.println("GET Response Code :: " + responseCode);
+        connection.setRequestProperty("User-Agent", USER_AGENT);
+        responseCode = connection.getResponseCode();
         StringBuffer response = new StringBuffer();
-        if (responseCode == HttpURLConnection.HTTP_OK) { // success
-            BufferedReader in = new BufferedReader(new InputStreamReader(
-                    con.getInputStream()));
+        if (responseCode == HttpURLConnection.HTTP_OK) {
+            BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String inputLine;
-
-
             while ((inputLine = in.readLine()) != null) {
                 response.append(inputLine);
             }
             in.close();
-            System.out.println(response.toString());
         } else {
             System.out.println("GET request not worked");
         }
+        System.out.println(response);
         System.out.println("GET DONE");
         return response.toString();
     }
-
 }

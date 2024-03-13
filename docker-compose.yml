@@ -1,0 +1,36 @@
+version: '2'
+
+services:
+  db:
+    image: mongo:3.6.1
+    container_name: mongodb
+    volumes:
+      - mongodb_data:/data/db
+      - mongodb_config:/data/configdb
+    command: mongod
+  servicefacade:
+    build:
+      context: .
+      dockerfile: DockerfileServiceFacade
+    container_name: logservicefacade
+    ports:
+      - "8087:6000"
+  logserviceuno:
+    build:
+      context: .
+      dockerfile: DockerfileService
+    container_name: logserviceuno
+  logservicedos:
+    build:
+      context: .
+      dockerfile: DockerfileService
+    container_name: logservicedos
+  logservicetres:
+    build:
+      context: .
+      dockerfile: DockerfileService
+    container_name: logservicetres
+
+volumes:
+  mongodb_data:
+  mongodb_config:

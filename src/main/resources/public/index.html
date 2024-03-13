@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logs</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="index.css" rel="stylesheet"> <!-- Estilos personalizados -->
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Logs</h1>
+    <form id="addLogsForm" action="/logs">
+        <div class="form-group">
+            <label for="msg">Write:</label>
+            <input id="msg" name="msg" type="text" class="form-control" placeholder="New Log">
+        </div>
+        <button onclick="loadGetMsg()" type="button" class="btn btn-primary">Save</button>
+    </form>
+    <div class="table-responsive mt-5">
+        <table id="logsTable" class="table">
+            <thead>
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col" class="text-right">Log</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Aquí se mostrarán los registros -->
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- Bootstrap JS y tu script personalizado -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="index.js"></script>
+</body>
+</html>
