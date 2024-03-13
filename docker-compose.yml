@@ -14,7 +14,7 @@ services:
       dockerfile: DockerfileServiceFacade
     container_name: logservicefacade
     ports:
-      - "8087:6000"
+      - "38000:6000"
   logserviceuno:
     build:
       context: .
