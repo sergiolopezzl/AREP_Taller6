@@ -72,7 +72,6 @@ class LogServiceTest {
 
         //logServiceFacade.main(mockRequest, mockResponse);
 
-
         //verify(mockResponse).type("application/json");
 
     }

@@ -5,8 +5,7 @@ import static spark.Spark.*;
 
 public class LogServiceFacade {
 
-
-    public static void main() {
+    public static void main(String[] args) {
         String[] logServices = getLogServicesURLS(System.getenv("LOG_SERVICES").split(";"));
         ServiceInvoker invoker = new ServiceInvoker(logServices);
         staticFiles.location("/public");

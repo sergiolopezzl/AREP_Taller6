@@ -1,4 +1,5 @@
 ### Sergio Daniel Lopez Vargas
+
 # AREP_Taller6
 
 ## Introducción
@@ -56,19 +57,25 @@ cd AREP_Taller6
 mvn clean package
 ```
 
-* Ejecute el servidor utilizando el siguiente comando: 
+* Ejecuta los servicios de docker-compose.yml con el siguiente comando: 
 
 ```
 docker-compose up -d
 ```
 
-* Ejecute el servidor utilizando el siguiente comando:
+* Mirar si estan los contenedores corriendo el siguiente comando:
 
 ```
 docker ps
 ```
 
-* Ejecute el servidor utilizando el siguiente comando:
+* Entre a la pagina mediante este link si es Localmente:
+
+```
+http://localhost:38000/index.html
+```
+
+* Entre a la pagina mediante este link si esta la instancia EC2:
 
 ```
 http://ec2-3-84-133-29.compute-1.amazonaws.com:38000/index.html
@@ -80,11 +87,16 @@ http://ec2-3-84-133-29.compute-1.amazonaws.com:38000/index.html
 ### Pruebas
 
 * Video
-  [![Video](https://img.youtube.com/vi/BXyCjFyGHB0/sddefault.jpg)](https://www.youtube.com/watch?v=BXyCjFyGHB0)
 
-* Imagen
+[![Video](https://img.youtube.com/vi/BXyCjFyGHB0/sddefault.jpg)](https://www.youtube.com/watch?v=BXyCjFyGHB0)
+
+* AWS
 
 ![prueba1.png](src/main/resources/public/img/prueba1.png)
+
+* LOCAL
+
+![prueba3.png](src/main/resources/public/img/prueba3.png)
 
 * Pruebas unitarias
 
